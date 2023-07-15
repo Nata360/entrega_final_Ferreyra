@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Registrarse</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">¡Registrate aquí!</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">¡Así puedes disfrutar de Natart blogs!</p>
+{% endblock subheading %}
+
+{% block contenido %}
+<form action={% url 'usuario:registrarse' %} method="POST">
+{% csrf_token %}
+<table>
+    {{formulario}}
+</table>
+<button>Registrarse</button>
+</form>
+{% endblock contenido %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+
+{% endblock contacto %}

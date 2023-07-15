@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Editar perfil</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">Edición de perfil</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Aquí puedes cambiar los datos de tu perfil</p>
+{% endblock subheading %}
+
+{% block contenido %}
+<form action={% url 'usuario:editar_perfil' %} method="POST" enctype='multipart/form-data'>
+{% csrf_token %}
+<table>
+    {{formulario}}
+</table>
+<button>Guardar cambios</button>
+</form>
+<button type='button'><a class= 'navbar-brand' href={% url 'usuario:modificar_pass' %}></a></button>
+{% endblock contenido %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+
+{% endblock contacto %}

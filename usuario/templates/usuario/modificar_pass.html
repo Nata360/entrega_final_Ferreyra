@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Cambiar contraseña</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">Cambiar contraseña</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Recuerda no compartir tu contraseña</p>
+{% endblock subheading %}
+
+{% block contenido %}
+<form action={% url 'usuario:modificar_pass' %} method="POST">
+{% csrf_token %}
+<table>
+    {{form}}
+</table>
+<button>Cambiar contraseña</button>
+</form>
+{% endblock contenido %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+
+{% endblock contacto %}
