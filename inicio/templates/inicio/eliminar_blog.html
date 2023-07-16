@@ -1,23 +1,24 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Natart blog</title>
+<title>Eliminar el blog</title>
 {% endblock title %}
 
 {% block masterhead %}
-<h1 class="masthead-heading text-uppercase mb-0">¡Bienvenidos a Natart blogs!</h1>
+<h1 class="masthead-heading text-uppercase mb-0"></h1>
 {% endblock masterhead %}
 
 {% block subheading %}
-<p class="masthead-subheading font-weight-light mb-0">Blog de arte - Ilustración - Fotografía</p>
+<p class="masthead-subheading font-weight-light mb-0"></p>
 {% endblock subheading %}
 
 {% block contenido %}
-{% if request.user.is_authenticated %}
-<button>
-    <a href={% url 'inicio:crear_blog' %}>Crea tu blog!</a>
-</button>
-{% endif %}
+<form action={% url 'inicio:eliminar_blog' blog.id%} method="POST">
+    {% csrf_token %}
+    <p>confirmar eliminar el blog {{blog}}</p>
+    <button>Confirmar</button>
+</form>
+
 {% endblock contenido %}
 
 {% block about %}

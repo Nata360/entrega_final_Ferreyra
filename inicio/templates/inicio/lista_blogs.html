@@ -14,21 +14,22 @@
 
 {% block contenido %}
 {% if blogs %}
-{% comment %} {% for blog in blogs %}
-<li>{{blog}}
-    <button>
-        <a class="navbar-brand" href={% url 'inicio:entrar_blog' blog.id %}>Ver más</a> 
-    </button>
-    <button>
-        <a class="navbar-brand" href={% url 'inicio:editar_blog' blog.id %}>Modificar</a> 
-    </button>
-    <button>
-        <a class="navbar-brand" href={% url 'inicio:eliminar_blog' blog.id %}>Eliminar</a>
-    </button>
+{% for blog in blogs %}
+<li>
+{{blog}}
+<button>
+    <a class="navbar-brand" href={% url 'inicio:ver_blog' blog.id %}>Ver blog</a>
+</button>
+<button>
+    <a class="navbar-brand" href={% url 'inicio:editar_blog' blog.id %}>Editar blog</a>
+</button>
+<button>
+    <a class="navbar-brand" href={% url 'inicio:eliminar_blog' blog.id %}>Eliminar blog</a>
+</button>
 </li>
-{% endfor %} {% endcomment %}
+{% endfor %}
 {% else %}
-<a href={% url 'inicio:sin_datos' %}>asd</a>
+<a href={% url 'inicio:sin_datos' %}></a>
 {% comment %} <button>
     <a class='navbar-brand' href={% url 'inicio:inicio' %}>Volver al menú principal</a>
 </button> {% endcomment %}
@@ -40,5 +41,5 @@
 {% endblock about %}
 
 {% block contacto %}
-{% comment %} <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Login</h2> {% endcomment %}
+
 {% endblock contacto %}

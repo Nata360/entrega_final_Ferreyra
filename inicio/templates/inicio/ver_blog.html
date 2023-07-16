@@ -1,23 +1,22 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Natart blog</title>
+<title>{{blog.nombre_blog}}</title>
 {% endblock title %}
 
 {% block masterhead %}
-<h1 class="masthead-heading text-uppercase mb-0">¡Bienvenidos a Natart blogs!</h1>
+<h1 class="masthead-heading text-uppercase mb-0">¡Bienvenidos a {{blog.nombre_blog}}</h1>
 {% endblock masterhead %}
 
 {% block subheading %}
-<p class="masthead-subheading font-weight-light mb-0">Blog de arte - Ilustración - Fotografía</p>
+<p class="masthead-subheading font-weight-light mb-0">Blog de {{blog.categoria}}</p>
 {% endblock subheading %}
 
 {% block contenido %}
-{% if request.user.is_authenticated %}
-<button>
-    <a href={% url 'inicio:crear_blog' %}>Crea tu blog!</a>
-</button>
-{% endif %}
+{{blog}}
+
+
+
 {% endblock contenido %}
 
 {% block about %}

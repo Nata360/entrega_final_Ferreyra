@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Editar</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">Editar blog</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Aquí puedes cambiar los datos de tu blog</p>
+{% endblock subheading %}
+
+{% block contenido %}
+<form action={% url 'inicio:editar_blog' blog.id %} method="POST">
+    {% csrf_token %}
+    <table>
+        {{form}}
+    </table>
+    <button>Editar</button>
+</form>
+
+<button>
+    {% comment %} <a href={% url 'inicio:subir_imagen_view' %}> Subir imagen</a> {% endcomment %}
+</button>
+
+{% endblock contenido %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+
+{% endblock contacto %}

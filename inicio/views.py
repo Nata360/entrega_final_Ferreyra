@@ -2,9 +2,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from inicio.models import Blog
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from .form import FormularioSubirImagen
 # Create your views here.
 
 
@@ -25,3 +28,33 @@ class ListaDeBlogs(ListView):
     template_name = "inicio/lista_blogs.html"
     context_object_name = 'blogs'
     
+class EditarBlog(LoginRequiredMixin, UpdateView):
+    model = Blog
+    template_name = 'inicio/editar_blog.html'
+    fields = ['nombre_blog', 'categoria', 'descripcion']
+    success_url = reverse_lazy('inicio:lista_blogs')
+    
+class EliminarBlog(LoginRequiredMixin, DeleteView):
+    model = Blog
+    template_name = 'inicio/eliminar_blog.html'
+    success_url = reverse_lazy('inicio:lista_blogs')
+
+class VerBlog(DetailView):
+    model = Blog
+    template_name = 'inicio/ver_blog.html'
+    
+
+@login_required
+def subir_imagen_view(request):
+    if request.method == 'POST':
+        formulario = FormularioSubirImagen(request.POST, request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            mensaje = '¡La imagen se ha subido correctamente!'
+    else:
+        formulario = FormularioSubirImagen()
+        
+    return 
+
+def home_view(request):
+    return render('base.html')

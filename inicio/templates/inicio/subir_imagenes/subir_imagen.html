@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Natart blog</title>
+<title>{{blog.nombre_blog}}</title>
 {% endblock title %}
 
 {% block masterhead %}
-<h1 class="masthead-heading text-uppercase mb-0">¡Bienvenidos a Natart blogs!</h1>
+<h1 class="masthead-heading text-uppercase mb-0">Sube tus imagenes</h1>
 {% endblock masterhead %}
 
 {% block subheading %}
@@ -13,16 +13,16 @@
 {% endblock subheading %}
 
 {% block contenido %}
-{% if request.user.is_authenticated %}
-<button>
-    <a href={% url 'inicio:crear_blog' %}>Crea tu blog!</a>
-</button>
-{% endif %}
+<form action={% url 'inicio:subir_imagen_view' %} method='POST' enctype='multipart/form-data'>
+    {% csrf_token %}
+<table>{{formulario}}</table>
+<button>Guardar Imagen</button>
+</form>
+
 {% endblock contenido %}
 
 {% block about %}
 {% endblock about %}
 
 {% block contacto %}
-{% comment %} <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Login</h2> {% endcomment %}
 {% endblock contacto %}
