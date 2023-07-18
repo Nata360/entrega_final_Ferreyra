@@ -12,17 +12,17 @@ class Blog(models.Model):
     def __str__(self):
         return f'Blog: {self.nombre_blog} por {self.nombre_autor}'
     
-class Albun(models.Model):
-    creador = models.ForeignKey(User, on_delete=models.CASCADE)
-    titulo = models.CharField(max_length=50)
-    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+# class Albun(models.Model):
+#     creador = models.ForeignKey(User, on_delete=models.CASCADE)
+#     titulo = models.CharField(max_length=50)
+#     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+#     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     
-    def __unicode__(self,):
-        return self.titulo
+#     def __unicode__(self,):
+#         return self.titulo
 
-class AlbunImagen(models.Model):
-    albun = models.ForeignKey(Albun, related_name='imagenes', on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to='albun/imagenes')
-    def __unicode__(self,):
-        return str(self.imagen)
+# class AlbunImagen(models.Model):
+#     albun = models.ForeignKey(Albun, related_name='imagenes', on_delete=models.CASCADE)
+#     imagen = models.ImageField(upload_to='albun/imagenes')
+#     def __unicode__(self,):
+#         return str(self.imagen)

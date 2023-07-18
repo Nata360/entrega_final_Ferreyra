@@ -13,6 +13,7 @@
 {% endblock subheading %}
 
 {% block contenido %}
+
 <form action={% url 'inicio:editar_blog' blog.id %} method="POST">
     {% csrf_token %}
     <table>
@@ -21,9 +22,8 @@
     <button>Editar</button>
 </form>
 
-<button>
-    {% comment %} <a href={% url 'inicio:subir_imagen_view' %}> Subir imagen</a> {% endcomment %}
-</button>
+
+{% endif %}
 
 {% endblock contenido %}
 

@@ -15,6 +15,18 @@
 {% block contenido %}
 {{blog}}
 
+<button>
+    <a href={% url 'galeria:imagen_galeria' %}>Ver galería</a>
+</button>
+
+{% if request.user.is_authenticated %}
+<button>
+    <a href={% url 'galeria:subir_imagen' %}>Cargar Imagen</a>
+</button>
+
+
+{% endif %}
+
 
 
 {% endblock contenido %}

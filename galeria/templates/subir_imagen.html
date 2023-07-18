@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>{{blog.nombre_blog}}</title>
+<title>Subir imagenes</title>
 {% endblock title %}
 
 {% block masterhead %}
@@ -13,9 +13,12 @@
 {% endblock subheading %}
 
 {% block contenido %}
-<form action={% url 'inicio:subir_imagen_view' %} method='POST' enctype='multipart/form-data'>
-    {% csrf_token %}
-<table>{{formulario}}</table>
+
+<form action={% url 'galeria:subir_imagen' %} method='POST' enctype='multipart/form-data'>
+{% csrf_token %}
+<table>
+    {{formulario}}
+</table>
 <button>Guardar Imagen</button>
 </form>
 

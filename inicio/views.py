@@ -7,7 +7,7 @@ from inicio.models import Blog
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .form import FormularioSubirImagen
+
 # Create your views here.
 
 
@@ -44,17 +44,29 @@ class VerBlog(DetailView):
     template_name = 'inicio/ver_blog.html'
     
 
-@login_required
-def subir_imagen_view(request):
-    if request.method == 'POST':
-        formulario = FormularioSubirImagen(request.POST, request.FILES)
-        if formulario.is_valid():
-            formulario.save()
-            mensaje = '¡La imagen se ha subido correctamente!'
-    else:
-        formulario = FormularioSubirImagen()
+# @login_required
+# def subir_imagen_view(request):
+#     if request.method == 'POST':
+#         formulario = FormularioSubirImagen(request.POST, request.FILES)
+#         if formulario.is_valid():
+#             formulario.save()
+#             mensaje = '¡La imagen se ha subido correctamente!'
+#     else:
+#         formulario = FormularioSubirImagen()
         
-    return 
+#     return 
 
-def home_view(request):
-    return render('base.html')
+# @login_required
+# def crear_albun(request):
+#     info_extra_user = request.user.infoextra
+#     if request.method == 'POST':
+#         formulario = FormularioCrearAlbun(request.POST, request.FILES, instance= request.user)
+#         if formulario.is_valid():
+#             formulario.save()
+#             mensaje = '¡El albun se ha creado correctamente!'
+#     else:
+#         formulario = FormularioCrearAlbun()
+#     return render(request, 'inicio/subir_imagenes/crear_albun.html', {'formulario':formulario})
+
+# def home_view(request):
+#     return render('base.html')
