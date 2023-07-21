@@ -1,14 +1,11 @@
 from django import forms
-from .models import Blog
+from .models import *
 
-# class FormularioSubirImagen(forms.ModelForm):
-    
-#     class Meta:
-#         model = AlbunImagen
-#         fields = 'albun', 'imagen'
+class BuscarBlogFormulario(forms.Form):
+    nombre = forms.CharField(max_length=20, required=False)
 
-# class FormularioCrearAlbun(forms.ModelForm):
-    
-#     class Meta:
-#         model = Albun
-#         fields = ['titulo']
+class ImagenFormulario(forms.ModelForm):
+    descripcion = models.CharField(max_length=200)
+    class Meta:
+        model = Imagen
+        fields = ['imagen', 'titulo', 'descripcion', 'blog']

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Subir imagen</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">Cargar una imagen</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">¡Sube las imagenes que tu quieras!</p>
+{% endblock subheading %}
+
+{% block contenido %}
+
+{% if request.user.is_authenticated %}
+<form action={% url 'inicio:subir_imagen' %} method='POST' enctype='multipart/form-data'>
+    {% csrf_token %}
+<table>
+    {{formulario}}
+</table>
+<button>Cargar Imagen</button>
+
+    {% comment %} <p><input id= 'id_imagen' type="file" accept='imagen/*' name='imagen' required></p>
+    <p>
+        Nombre de imagen:
+        <input id='id_name' type='text' name='name' required>
+    </p>
+    <p>
+        <input type="submit" value='Submit'>
+    </p>     {% endcomment %}
+</form> 
+{% endif %}
+{% endblock contenido %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+{% comment %} <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Login</h2> {% endcomment %}
+{% endblock contacto %}

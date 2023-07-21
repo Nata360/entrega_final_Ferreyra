@@ -7,20 +7,25 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from usuario.models import InfoExtra
+
 # Create your views here.
 
 def login(request):
     if request.method == 'POST':
+        
         formulario = AuthenticationForm(request, data=request.POST)
         if formulario.is_valid():
+            
             usuario = formulario.cleaned_data['username']
             contrasenia = formulario.cleaned_data['password']
+            
             
             user = authenticate(username=usuario, password=contrasenia)
             
             django_login(request, user)
             
             InfoExtra.objects.get_or_create(user=user)
+    
             
             return redirect('inicio:inicio')
     

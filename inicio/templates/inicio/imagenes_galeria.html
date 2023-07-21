@@ -1,5 +1,6 @@
+
 {% extends 'base.html' %}
-{% load static %}
+
 
 {% block title %}
 <title>{{blog.nombre_blog}}</title>
@@ -15,18 +16,6 @@
 
 {% block contenido %}
 {{blog}}
-
-
-{% if request.user.is_authenticated %}
-<button>
-    <a href={% url 'inicio:subir_imagen' %}>Cargar Imagen</a>
-</button>
-{% endif %}
-
-<button>
-    <a href={% url 'inicio:imagen_galeria' %}>Ver galeria</a>
-</button>
-
 {% load static %}
 
 {% for imagen in imagenes %}
@@ -38,11 +27,11 @@
 
 {% endfor %}
 
+
 {% endblock contenido %}
 
 {% block about %}
 {% endblock about %}
 
 {% block contacto %}
-{% comment %} <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Login</h2> {% endcomment %}
 {% endblock contacto %}

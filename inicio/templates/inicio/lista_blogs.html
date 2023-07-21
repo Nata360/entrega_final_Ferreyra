@@ -13,6 +13,12 @@
 {% endblock subheading %}
 
 {% block contenido %}
+
+<form action="" method="get">
+    {{formulario}}
+    <button>Buscar</button>
+</form>
+
 {% if blogs %}
 {% for blog in blogs %}
 <li>
