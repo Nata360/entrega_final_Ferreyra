@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Crear un albun</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">Creación de albunes</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Blog de {{blog.categoria}}</p>
+{% endblock subheading %}
+
+{% block contenido %}
+<h1>Crea tu albun</h1>
+<table>
+    <form method='POST'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type='submit' >Crear</button>
+    </form>
+</table>
+
+{% comment %} <table>
+    <form action={% url 'inicio:crear_albun' blog.pk  %} method='POST'>
+        {% csrf_token %}
+        {{form}}
+        <button>Crear</button>
+    </form>
+</table> {% endcomment %}
+
+{% endblock contenido %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+{% endblock contacto %}

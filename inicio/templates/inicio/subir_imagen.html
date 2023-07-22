@@ -18,18 +18,9 @@
 <form action={% url 'inicio:subir_imagen' %} method='POST' enctype='multipart/form-data'>
     {% csrf_token %}
 <table>
-    {{formulario}}
+    {{form}}
 </table>
 <button>Cargar Imagen</button>
-
-    {% comment %} <p><input id= 'id_imagen' type="file" accept='imagen/*' name='imagen' required></p>
-    <p>
-        Nombre de imagen:
-        <input id='id_name' type='text' name='name' required>
-    </p>
-    <p>
-        <input type="submit" value='Submit'>
-    </p>     {% endcomment %}
 </form> 
 {% endif %}
 {% endblock contenido %}

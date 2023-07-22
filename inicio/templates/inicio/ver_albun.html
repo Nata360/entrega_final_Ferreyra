@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>{{albun.titulo}}</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">{{albun.titulo}}</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Blog de arte - Ilustración - Fotografía</p>
+{% endblock subheading %}
+
+{% block contenido %}
+
+{% for imagen in albun.imagen_set.all %}
+    <li>
+        <h2>{{imagen.titulo}}</h2>
+        <img src={{imagen.imagen.url}} alt={{imagen.titulo}} style="width:800px" enctype='multipart/form-data'>
+        <p>{{imagen.descripcion}}</p>
+    </li>
+{% endfor %}
+
+{% endblock contenido %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+{% endblock contacto %}
+

@@ -33,6 +33,9 @@
     <a class="navbar-brand" href={% url 'inicio:eliminar_blog' blog.id %}>Eliminar blog</a>
 </button>
 </li>
+<button>
+    <a class= "navbar-brand" href={% url 'inicio:crear_albun' pk=blog.pk %}>Crear un Albun</a> 
+</button>
 {% endfor %}
 {% else %}
 

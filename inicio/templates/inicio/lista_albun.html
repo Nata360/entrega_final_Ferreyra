@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Albunes</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">Listado de albunes</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Blog de arte - Ilustración - Fotografía</p>
+{% endblock subheading %}
+
+{% block contenido %}
+<h2>Lista de Álbunes</h2>
+{% comment %} <button>
+    <a class='navbar-brand' href={% url 'inicio:crear_albun' %}>Volver al menú principal</a>
+</button>  {% endcomment %}
+{% if albunes %}
+    {% for albun in albunes %}
+
+    <li>
+        {{albun}}
+        <button>
+            <li><a href={% url 'inicio:ver_albun' albun.id %}> {{albun.titulo}} por {{albun.autor}} </a></li>
+        </button>
+        <button>
+            <a href={% url 'inicio:subir_imagen' %}>Cargar Imagen</a>
+        </button>
+    </li>
+    
+    {% endfor %}
+
+{% else %}
+<p>No se encuentran álbunes</p>
+
+{% endif %}
+
+
+{% endblock contenido %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+{% endblock contacto %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>{{albun.titulo}}</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">{{albun.titulo}}</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Blog de arte - Ilustración - Fotografía</p>
+{% endblock subheading %}
+
+{% block contenido %}
+ 
+    {% for albun_info in albun_data %}
+    <h2>{{albun_info.albun.titulo}}</h2>
+    <p>{{albun_info.albun.descripcion}}</p>
+    <ul>
+        {% for imagen in albun_info.imagenes %}
+    <li>
+        <img src={{imagen.imagen.url}} alt={{imagen.titulo}} style='width:800px' enctype='multipart/form-data'>
+    </li>
+        {% endfor %}
+
+    </ul>
+    {% endfor %}
+{% endblock contenido %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+{% endblock contacto %}
+

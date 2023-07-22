@@ -17,26 +17,19 @@
 {{blog}}
 
 
-{% if request.user.is_authenticated %}
+{% comment %} {% if request.user.is_authenticated %}
 <button>
     <a href={% url 'inicio:subir_imagen' %}>Cargar Imagen</a>
 </button>
-{% endif %}
+{% endif %} {% endcomment %}
 
 <button>
-    <a href={% url 'inicio:imagen_galeria' %}>Ver galeria</a>
+    <a class= "navbar-brand" href={% url 'inicio:lista_albun' %}>Ver lista de álbunes</a>
+</button>
+<button>
+    <a class= "navbar-brand" href={% url 'inicio:crear_albun' pk=blog.pk %}>Crear un Albun</a> 
 </button>
 
-{% load static %}
-
-{% for imagen in imagenes %}
-<li>
-    <img src={{imagen.imagen.url}} alt={{imagen.titulo}} style='width:800px' enctype='multipart/form-data'>
-    <p>{{imagen.titulo}} - Por el autor: {{request.user}}</p>
-    <p>{{imagen.descripcion}}</p>
-</li>
-
-{% endfor %}
 
 {% endblock contenido %}
 
