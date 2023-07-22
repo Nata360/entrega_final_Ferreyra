@@ -16,6 +16,7 @@
 <form method='POST' enctype="multipart/form-data" >
     {% csrf_token %}
     {{formulario.as_p}}
+    {{formulario.media}}
     <button type='submit'>Guardar cambios</button>
 </form>
 <a href={% url 'inicio:ver_albun' pk=imagen.albun.pk %}>Cancelar</a>

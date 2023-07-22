@@ -17,6 +17,7 @@ class ImagenFormulario(forms.ModelForm):
         fields = ['albun', 'imagen', 'titulo', 'descripcion', 'blog']
 
 class EditarImagenFormulario(forms.ModelForm):
+    descripcion = RichTextFormField(max_length=800)
     class Meta:
         model = Imagen
         fields = ['titulo', 'descripcion']
