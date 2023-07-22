@@ -1,24 +1,23 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Iniciar sesión</title>
+<title>Editar albun</title>
 {% endblock title %}
 
 {% block masterhead %}
-<h1 class="masthead-heading text-uppercase mb-0">Iniciar sesión</h1>
+<h1 class="masthead-heading text-uppercase mb-0">Editar el albun</h1>
 {% endblock masterhead %}
 
 {% block subheading %}
-<p class="masthead-subheading font-weight-light mb-0">Blog de arte - Ilustración - Fotografía</p>
+<p class="masthead-subheading font-weight-light mb-0"></p>
 {% endblock subheading %}
 
 {% block contenido %}
-<form action={% url 'usuario:login' %} method="POST">
+<form method="post">
     {% csrf_token %}
-    <table>
-        {{formulario}}
-    </table>
-    <button>Ingresar</button>
+    {{ formulario.as_p }}
+    <button type="submit">Guardar cambios</button>
+    <a href="{% url 'inicio:lista_albun' %}">Cancelar</a>
 </form>
 {% endblock contenido %}
 
@@ -26,10 +25,8 @@
 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'inicio:inicio' %}>About</a></li>
 {% endblock about_inicio %}
 
-
 {% block about %}
 {% endblock about %}
 
 {% block contacto %}
-
 {% endblock contacto %}

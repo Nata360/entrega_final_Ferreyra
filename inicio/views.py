@@ -2,8 +2,8 @@ from typing import Any, Dict
 from django.db import models
 from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseForbidden
 from django.views.generic.edit import CreateView, UpdateView, DeleteView,FormView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -81,6 +81,8 @@ class CrearAlbun(LoginRequiredMixin,CreateView):
         blog = self.get_context_data().get('blog')
         if blog:
             form.instance.blog = blog
+            form.instance.autor = self.request.user
+            
             return super().form_valid(form)
         else:
             return self.form_invalid(form)
@@ -102,6 +104,31 @@ class VerAlbun(DetailView):
         imagenes = Imagen.objects.filter(albun=albun)
         context['albun_data'] = [{'albun' : albun, 'imagenes' : imagenes}]
         return context
+
+class EliminarAlbun(LoginRequiredMixin, DeleteView):
+    model = Albun
+    template_name = 'inicio/eliminar_albun.html'
+    success_url = reverse_lazy('inicio:lista_albun')
+    
+    def get_queryset(self):
+        queryset=super().get_queryset()
+        return queryset.filter(autor=self.request.user)
+    
+    
+@login_required
+def editar_albun(request, pk):
+    albun = get_object_or_404(Albun, pk=pk)
+    if albun.autor == request.user:
+        if request.method == 'POST':
+            formulario = EditarAlbunFormulario(request.POST, instance=albun)
+            if formulario.is_valid():
+                formulario.save()
+                return redirect('inicio:ver_albun', pk=albun.pk)
+        else:
+            formulario = EditarAlbunFormulario(instance=albun)
+        return render(request, 'inicio/editar_albun.html', {'formulario': formulario, 'albun': albun})
+    else:
+        return HttpResponseForbidden('No tienen permiso para editar este álbum')    
 
 
 class SubirImagen(LoginRequiredMixin, FormView):
@@ -133,28 +160,26 @@ def imagen_galeria(request):
         })
     return render(request, 'inicio/imagenes_galeria.html', {'albun_data':albun_data})
 
-
-# -----------RESGUARDO-----------
-# def subir_imagen(request):
-#     if request.method == 'POST':
-#         formulario = ImagenFormulario(request.POST, request.FILES)
-#         if formulario.is_valid():
-            
-#             # blog = formulario.cleaned_data.get('blog')
-#             # Imagen.objects.get_or_create(blog=)
-            
-#             nueva_imagen = Imagen(imagen = formulario.cleaned_data['imagen'], titulo = formulario.cleaned_data['titulo'])
-#             nueva_imagen.save()
-            
-#         return render(request, 'galeria/subir_imagen.html', {'formulario':formulario})
-#     else:
-#         formulario = ImagenFormulario()
-            
-#     return render(request, 'galeria/subir_imagen.html', {'formulario':formulario}) 
-
-# def eliminar_imagen(request, imagen_id):
-#     imagen = Imagen.objects.get(id=imagen_id)
-#     imagen.delete()
+@login_required
+def eliminar_imagen(request, pk):
+    imagen = get_object_or_404(Imagen, pk=pk)
+    if imagen.albun.autor == request.user:
+        imagen.delete()
     
-#     return redirect('galeria:albun')
-       
+    return redirect('inicio:ver_albun', pk=imagen.albun.pk)
+
+@login_required
+def editar_imagen(request, pk):
+    imagen = get_object_or_404(Imagen, pk=pk)
+    if imagen.albun.autor == request.user:
+        if request.method == 'POST':
+            formulario= EditarImagenFormulario(request.POST, instance=imagen)
+            if formulario.is_valid():
+                formulario.save()
+                return redirect('inicio:ver_albun', pk=imagen.albun.pk)
+        else:
+            formulario = EditarImagenFormulario(instance=imagen)
+        return render(request, 'inicio/editar_imagen.html', {'formulario':formulario, 'imagen':imagen})
+    else:
+        return HttpResponseForbidden('No tienen permiso para editar esta imagen')
+

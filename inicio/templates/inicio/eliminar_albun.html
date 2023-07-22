@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Eliminar albun</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">Eliminar el albun</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">¿Estás seguro de eliminar el albun?</p>
+{% endblock subheading %}
+
+{% block contenido %}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+<form method='POST'>
+    {% csrf_token %}
+    <button type='submit'>Eliminar álbun</button>
+    <a href={% url 'inicio:lista_albun' %}>Cancelar</a>
+</form>
+
+{% endblock contenido %}
+{% block about_inicio %}
+<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'inicio:inicio' %}>About</a></li>
+{% endblock about_inicio %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+{% endblock contacto %}

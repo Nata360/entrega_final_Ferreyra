@@ -14,15 +14,30 @@
 
 {% block contenido %}
 
-{% for imagen in albun.imagen_set.all %}
+{% for imagen in object.imagen_set.all %}
+
     <li>
         <h2>{{imagen.titulo}}</h2>
         <img src={{imagen.imagen.url}} alt={{imagen.titulo}} style="width:800px" enctype='multipart/form-data'>
-        <p>{{imagen.descripcion}}</p>
+        <p>{{imagen.descripcion | safe}}</p>
+        {% if imagen.albun.autor == request.user%}
+            <button>
+                <a href={% url 'inicio:eliminar_imagen' pk=imagen.pk %}>Eliminar</a>
+            </button>
+        {% endif %}
+        {% if imagen.albun.autor == request.user %}
+        <button>
+            <a href={% url 'inicio:editar_imagen' pk=imagen.pk %}>Editar</a>
+        </button>
+        {% endif %}
     </li>
 {% endfor %}
 
 {% endblock contenido %}
+
+{% block about_inicio %}
+<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'inicio:inicio' %}>About</a></li>
+{% endblock about_inicio %}
 
 {% block about %}
 {% endblock about %}

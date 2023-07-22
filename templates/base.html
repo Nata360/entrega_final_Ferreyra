@@ -31,7 +31,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
+                        {% block about_inicio %}
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>
+                        {% endblock about_inicio %}
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'inicio:lista_blogs' %}>Blogs</a></li>
                         {% if request.user.is_authenticated %}
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'usuario:editar_perfil' %}>{{request.user.username}}</a></li>
@@ -55,7 +57,7 @@
             <div class="container d-flex align-items-center flex-column">
                 <!-- Masthead Avatar Image-->
                 {% block imagen_principal %}
-                <img class="masthead-avatar mb-5" src={% static 'assets/img/avataaars.svg' %} alt="..." />
+                <img class="masthead-avatar mb-5" src={% static 'assets/img/portfolio/natanuevo.png' %} alt="..." />
                 {% endblock imagen_principal %}
                 <!-- Masthead Heading-->
                 {% block masterhead %}

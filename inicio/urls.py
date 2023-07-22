@@ -15,5 +15,8 @@ urlpatterns = [
     path('blog/lista_albunes/ver_albun/<int:pk>', views.VerAlbun.as_view(), name='ver_albun'),
     path('blog/ver_blog/subir_imagen/', views.SubirImagen.as_view(), name='subir_imagen'),
     path('blog/ver_blog/galeria_imagenes/<int:pk>', views.imagen_galeria, name='imagen_galeria'),
-    
+    path('blog/lista_albunes/ver_albun/eliminar_imagen/<int:pk>', views.eliminar_imagen, name='eliminar_imagen'),
+    path('blog/lista_albunes/ver_albun/editar_imagen/<int:pk>', views.editar_imagen, name='editar_imagen'),
+    path('blog/eliminar_albun/<int:pk>', views.EliminarAlbun.as_view(), name='eliminar_albun'),
+    path('blog/editar_albun/<int:pk>', views.editar_albun, name='editar_albun'),
 ]

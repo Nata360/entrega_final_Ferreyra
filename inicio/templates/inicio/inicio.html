@@ -15,14 +15,31 @@
 {% block contenido %}
 {% if request.user.is_authenticated %}
 <button>
-    <a href={% url 'inicio:crear_blog' %}>Crea tu blog!</a>
+    <a class='navbar-brand' href={% url 'inicio:crear_blog' %}>Crea tu blog!</a>
 </button>
 {% endif %}
 {% endblock contenido %}
 
 {% block about %}
+<section class="page-section bg-primary text-white mb-0" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-4 ms-auto"><p class="lead">Hola! mi nombre es Natanael Ferreyra, soy estudiante de medicina pero aun así me interesa la programación, por eso estoy haciendo el curso de introducción a la programación en python en la plataforma digital CoderHouse.</p></div>
+            <div class="col-lg-4 me-auto"><p class="lead">La idea de este proyecto es generar un espacio en donde se pueda compartir diferentes imágenes para apreciar el arte, fotografías, ilustraciones, caricaturas, etc!</p></div>
+        </div>
+        
+    </div>
+</section>
 {% endblock about %}
 
 {% block contacto %}
-{% comment %} <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Login</h2> {% endcomment %}
 {% endblock contacto %}

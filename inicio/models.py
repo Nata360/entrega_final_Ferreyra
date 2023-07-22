@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 
@@ -14,7 +15,7 @@ class Blog(models.Model):
         return f'Blog: {self.nombre_blog} por {self.nombre_autor}'
 
 class Albun(models.Model):
-    blog = models.OneToOneField(Blog, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=100)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
@@ -27,7 +28,7 @@ class Imagen(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='galeria/imagenes')
     titulo = models.CharField(max_length=50)
-    descripcion = models.TextField(null=True, max_length=800)
+    descripcion = RichTextField(null=True, max_length=800)
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

@@ -14,9 +14,7 @@
 
 {% block contenido %}
 <h2>Lista de Álbunes</h2>
-{% comment %} <button>
-    <a class='navbar-brand' href={% url 'inicio:crear_albun' %}>Volver al menú principal</a>
-</button>  {% endcomment %}
+
 {% if albunes %}
     {% for albun in albunes %}
 
@@ -25,6 +23,21 @@
         <button>
             <li><a href={% url 'inicio:ver_albun' albun.id %}> {{albun.titulo}} por {{albun.autor}} </a></li>
         </button>
+
+       
+        
+        <button>
+            <li><a href={% url 'inicio:editar_albun' albun.id %}> Editar </a></li>
+        </button>
+        
+        {% if imagen.albun.autor == request.user %}
+        <button>
+            <li><a href={% url 'inicio:eliminar_albun' albun.id %}>Eliminar</a></li>
+        </button>
+        {% endif %}
+        
+      
+
         <button>
             <a href={% url 'inicio:subir_imagen' %}>Cargar Imagen</a>
         </button>
@@ -39,6 +52,11 @@
 
 
 {% endblock contenido %}
+
+{% block about_inicio %}
+<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'inicio:inicio' %}>About</a></li>
+{% endblock about_inicio %}
+
 
 {% block about %}
 {% endblock about %}
