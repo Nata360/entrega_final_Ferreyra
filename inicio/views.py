@@ -3,7 +3,7 @@ from django.db import models
 from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden
 from django.views.generic.edit import CreateView, UpdateView, DeleteView,FormView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -12,6 +12,7 @@ from inicio.form import *
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -24,7 +25,12 @@ class CrearBlog(LoginRequiredMixin, CreateView):
     model = Blog
     template_name = 'inicio/crear_blog.html'
     fields = ['nombre_blog', 'nombre_autor', 'apellido_autor', 'categoria', 'descripcion',]
-    success_url = reverse_lazy('inicio:inicio')
+    success_url = reverse_lazy('inicio:lista_blogs')
+    
+    def form_valid(self, form):
+        
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
     
 class ListaDeBlogs(ListView):
     model = Blog
@@ -55,7 +61,21 @@ class EliminarBlog(LoginRequiredMixin, DeleteView):
     model = Blog
     template_name = 'inicio/eliminar_blog.html'
     success_url = reverse_lazy('inicio:lista_blogs')
-
+    
+    def get_queryset(self):
+        queryset=super().get_queryset()
+        return queryset.filter(autor=self.request.user)
+    def get(self, request,*args, **kwargs):
+        blog = self.get_object()
+ 
+        if blog.autor != self.request.user:
+            return redirect('inicio:no_puedes_borrar_blog') 
+        return super().get(request, *args, **kwargs)
+    
+        
+def no_puedes_borrar_blog(request):
+    return render(request, 'inicio/no_puedes_borrar_blog.html')
+        
 class VerBlog(DetailView):
     model = Blog
     template_name = 'inicio/ver_blog.html'
@@ -92,6 +112,19 @@ class ListaAlbun(ListView):
     model = Albun
     template_name = 'inicio/lista_albun.html'
     context_object_name = 'albunes'
+    
+    def get_queryset(self):
+        listado_albun = []
+        formulario = BuscarBlogFormulario(self.request.GET)
+        if formulario.is_valid():
+            nombre_a_buscar = formulario.cleaned_data['nombre']
+            listado_albun = Blog.objects.filter(nombre_blog__icontains=nombre_a_buscar)
+        return listado_albun
+    
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        contexto['formulario'] = BuscarAlbunFormulario
+        return contexto
     
 class VerAlbun(DetailView):
     model = Albun
@@ -182,4 +215,6 @@ def editar_imagen(request, pk):
         return render(request, 'inicio/editar_imagen.html', {'formulario':formulario, 'imagen':imagen})
     else:
         return HttpResponseForbidden('No tienen permiso para editar esta imagen')
+
+
 

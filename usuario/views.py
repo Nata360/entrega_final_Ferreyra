@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth import authenticate, login as django_login
@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from usuario.models import InfoExtra
+from .models import User
 
 # Create your views here.
 
@@ -55,17 +56,30 @@ def editar_perfil(request):
         if formulario.is_valid():
             
             avatar = formulario.cleaned_data.get('avatar')
+            biografia = formulario.cleaned_data.get('biografia')
             if avatar:
+                
                 info_extra_user.avatar = avatar
                 info_extra_user.save()
-            
+            if biografia:
+                info_extra_user.biografia = biografia
+                info_extra_user.save()
             formulario.save()
-            return redirect('inicio:inicio')
+            return redirect('usuario:info_perfil')
     else:   
-        formulario = MiFormularioDeEdicionDeDatosDeUsuario(initial={'avatar': info_extra_user.avatar}, instance=request.user)
+        formulario = MiFormularioDeEdicionDeDatosDeUsuario(initial={'avatar': info_extra_user.avatar, 'biografia': info_extra_user.biografia}, instance=request.user)
         
     return render(request, 'usuario/editar_perfil.html', {'formulario': formulario})
 
 class ModificarPass(LoginRequiredMixin, PasswordChangeView):
     template_name = 'usuario/modificar_password.html'
     success_url = reverse_lazy('usuario:modificar_pass')
+    
+def info_perfil(request, usuario_id):
+    perfil_usuario = get_object_or_404(User, id=usuario_id)
+    return render(request, 'usuario/info_perfil.html', {'perfil_usuario':perfil_usuario})
+
+def info_perfil_autor(request, usuario_id):
+    perfil_usuario = get_object_or_404(User, id=usuario_id)
+    return render(request, 'usuario/info_perfil_autor.html', {'perfil_usuario':perfil_usuario})
+

@@ -13,6 +13,7 @@
 {% endblock subheading %}
 
 {% block contenido %}
+
 <form action={% url 'inicio:eliminar_blog' blog.id%} method="POST">
     {% csrf_token %}
     <p>confirmar eliminar el blog {{blog}}</p>

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Tu perfil</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">Información de perfil</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Lo que necesites saber sobre {{perfil_usuario.username}}</p>
+{% endblock subheading %}
+
+{% block imagen_principal %}
+
+{% if perfil_usuario.infoextra.avatar %}
+    <img src={{perfil_usuario.infoextra.avatar.url}} alt="" height='400px'>
+{% endif %}
+
+{% endblock imagen_principal %}
+
+{% block contenido %}
+
+    
+       <p>Nombre de Usuario: {{perfil_usuario.username}}</p>
+       <p>Nombre: {{perfil_usuario.first_name}}</p>
+       <p>Apellido: {{perfil_usuario.last_name}}</p>
+       <p>Email: {{perfil_usuario.email}}</p>
+       <p>Biografía: {{perfil_usuario.infoextra.biografia | safe}} </p>
+    
+
+
+{% endblock contenido %}
+
+{% block about_inicio %}
+<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'inicio:inicio' %}>About</a></li>
+{% endblock about_inicio %}
+
+{% block about %}
+{% endblock about %}
+
+{% block contacto %}
+
+{% endblock contacto %}

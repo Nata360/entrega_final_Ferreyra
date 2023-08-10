@@ -15,16 +15,20 @@
 {% block contenido %}
 <h2>Lista de Álbunes</h2>
 
+<form action="" method="get">
+    {{formulario}}
+    <button>Buscar</button>
+</form>
+
 {% if albunes %}
     {% for albun in albunes %}
 
     <li>
         {{albun}}
         <button>
-            <li><a href={% url 'inicio:ver_albun' albun.id %}> {{albun.titulo}} por {{albun.autor}} </a></li>
+            <li><a href={% url 'inicio:ver_albun' pk=albun.pk %}> {{albun.titulo}} por {{albun.autor}} </a></li>
         </button>
 
-       
         
         <button>
             <li><a href={% url 'inicio:editar_albun' albun.id %}> Editar </a></li>

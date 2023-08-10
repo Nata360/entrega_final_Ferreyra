@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Natart blog</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">¡Bienvenidos a Natart blogs!</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Blog de arte - Ilustración - Fotografía</p>
+{% endblock subheading %}
+
+{% block contenido %}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endblock contenido %}
+
+{% block about %}
+<section class="page-section bg-primary text-white mb-0" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-4 ms-auto"><p class="lead">Hola! mi nombre es Natanael Ferreyra, soy estudiante de medicina pero aun así me interesa la programación, por eso estoy haciendo el curso de introducción a la programación en python en la plataforma digital CoderHouse.</p></div>
+            <div class="col-lg-4 me-auto"><p class="lead">La idea de este proyecto es generar un espacio en donde se pueda compartir diferentes imágenes para apreciar el arte, fotografías, ilustraciones, caricaturas, etc!</p></div>
+        </div>
+        
+    </div>
+</section>
+{% endblock about %}
+
+{% block contacto %}
+{% endblock contacto %}

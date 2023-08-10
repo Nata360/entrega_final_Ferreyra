@@ -8,6 +8,7 @@ urlpatterns = [
     path('blog/crear_blog/', views.CrearBlog.as_view(), name='crear_blog'),
     path('lista_blogs/', views.ListaDeBlogs.as_view(), name='lista_blogs'),
     path('blog/eliminar_blog/<int:pk>', views.EliminarBlog.as_view(), name='eliminar_blog'),
+    path('blog/eliminar_blog/no_puedes/', views.no_puedes_borrar_blog, name= 'no_puedes_borrar_blog'),
     path('blog/editar_blog/<int:pk>', views.EditarBlog.as_view(), name='editar_blog'),
     path('blog/ver_blog/<int:pk>', views.VerBlog.as_view(), name='ver_blog'),
     path('blog/lista_albunes/', views.ListaAlbun.as_view(), name='lista_albun'),
@@ -19,4 +20,5 @@ urlpatterns = [
     path('blog/lista_albunes/ver_albun/editar_imagen/<int:pk>', views.editar_imagen, name='editar_imagen'),
     path('blog/eliminar_albun/<int:pk>', views.EliminarAlbun.as_view(), name='eliminar_albun'),
     path('blog/editar_albun/<int:pk>', views.editar_albun, name='editar_albun'),
+    
 ]

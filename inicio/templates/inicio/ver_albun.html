@@ -14,6 +14,10 @@
 
 {% block contenido %}
 
+<button>
+    <a class='navband' href={% url 'usuario:info_perfil_autor' albun.autor.id %}>Información sobre {{albun.autor}}</a>
+</button>
+
 {% for imagen in object.imagen_set.all %}
 
     <li>

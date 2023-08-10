@@ -17,11 +17,6 @@
 {{blog}}
 
 
-{% comment %} {% if request.user.is_authenticated %}
-<button>
-    <a href={% url 'inicio:subir_imagen' %}>Cargar Imagen</a>
-</button>
-{% endif %} {% endcomment %}
 
 <button>
     <a class= "navbar-brand" href={% url 'inicio:lista_albun' %}>Ver lista de álbunes</a>
