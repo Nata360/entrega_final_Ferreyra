@@ -115,10 +115,10 @@ class ListaAlbun(ListView):
     
     def get_queryset(self):
         listado_albun = []
-        formulario = BuscarBlogFormulario(self.request.GET)
+        formulario = BuscarAlbunFormulario(self.request.GET)
         if formulario.is_valid():
             nombre_a_buscar = formulario.cleaned_data['nombre']
-            listado_albun = Blog.objects.filter(nombre_blog__icontains=nombre_a_buscar)
+            listado_albun = Albun.objects.filter(titulo__icontains=nombre_a_buscar)
         return listado_albun
     
     def get_context_data(self, **kwargs):
@@ -126,6 +126,7 @@ class ListaAlbun(ListView):
         contexto['formulario'] = BuscarAlbunFormulario
         return contexto
     
+
 class VerAlbun(DetailView):
     model = Albun
     template_name = 'inicio/ver_albun.html'
@@ -136,6 +137,7 @@ class VerAlbun(DetailView):
         albun = self.get_object()
         imagenes = Imagen.objects.filter(albun=albun)
         context['albun_data'] = [{'albun' : albun, 'imagenes' : imagenes}]
+        context['albun_id'] = albun.id
         return context
 
 class EliminarAlbun(LoginRequiredMixin, DeleteView):
@@ -169,6 +171,11 @@ class SubirImagen(LoginRequiredMixin, FormView):
     form_class = ImagenFormulario
     success_url = reverse_lazy('inicio:lista_albun')
     
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+    
     def form_valid(self, form):
         nueva_imagen = Imagen(
             imagen = form.cleaned_data['imagen'],
@@ -179,7 +186,6 @@ class SubirImagen(LoginRequiredMixin, FormView):
         )
         nueva_imagen.save()
         return super().form_valid(form)
-    
     
 
 def imagen_galeria(request):

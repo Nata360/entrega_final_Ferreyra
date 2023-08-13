@@ -26,7 +26,7 @@
     <li>
         {{albun}}
         <button>
-            <li><a href={% url 'inicio:ver_albun' pk=albun.pk %}> {{albun.titulo}} por {{albun.autor}} </a></li>
+            <li><a href={% url 'inicio:ver_albun' albun.pk %}> Ingresar </a></li>
         </button>
 
         
@@ -34,17 +34,13 @@
             <li><a href={% url 'inicio:editar_albun' albun.id %}> Editar </a></li>
         </button>
         
-        {% if imagen.albun.autor == request.user %}
+        {% if albun.autor == request.user %}
         <button>
             <li><a href={% url 'inicio:eliminar_albun' albun.id %}>Eliminar</a></li>
         </button>
         {% endif %}
         
-      
-
-        <button>
-            <a href={% url 'inicio:subir_imagen' %}>Cargar Imagen</a>
-        </button>
+    
     </li>
     
     {% endfor %}

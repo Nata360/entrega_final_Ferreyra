@@ -22,9 +22,15 @@ class CrearAlbunFormulario(forms.ModelForm):
 
 class ImagenFormulario(forms.ModelForm):
     descripcion = RichTextFormField(max_length=800)
+    
+    def __init__(self, user, *args, **kwargs):
+        super(ImagenFormulario, self).__init__(*args, **kwargs)
+        self.fields['albun'].queryset = Albun.objects.filter(autor=user)
+    
     class Meta:
         model = Imagen
         fields = ['albun', 'imagen', 'titulo', 'descripcion', 'blog']
+    
 
 class EditarImagenFormulario(forms.ModelForm):
     descripcion = RichTextFormField(max_length=800)
