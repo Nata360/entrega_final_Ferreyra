@@ -13,11 +13,10 @@
 {% endblock subheading %}
 
 {% block contenido %}
-{% if request.user.is_authenticated %}
-<button>
-    <a class='navbar-brand' href={% url 'inicio:crear_blog' %}>Crea tu blog!</a>
-</button>
-{% endif %}
+<div class="row">
+    <div class="col-lg-4 ms-auto"><p class="lead">Bienvenidos! Qué esperas para comenzar a compartir tu arte? Vamos anímate y crea tu propio blog... </p></div>
+    <div class="col-lg-4 me-auto"><p class="lead">¡También puedes hecharle un vistazo al blog de los demás, conocer artistas y divertirte! </p></div>
+</div>
 {% endblock contenido %}
 
 {% block about %}

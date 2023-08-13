@@ -19,9 +19,11 @@
     {{formulario}}
     {{formulario.media}}
 </table>
+<button type='button'><a class= 'navbar-brand' href={% url 'usuario:modificar_pass' %}>Cambiar contraseña</a></button>
 <button>Guardar cambios</button>
 </form>
 <button type='button'><a class= 'navbar-brand' href={% url 'usuario:modificar_pass' %}></a></button>
+
 {% endblock contenido %}
 
 {% block about_inicio %}

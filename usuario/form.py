@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextFormField
 
@@ -23,3 +23,13 @@ class MiFormularioDeEdicionDeDatosDeUsuario(UserChangeForm):
     class Meta:
         model = User
         fields = ['email', 'first_name', 'last_name', 'avatar', 'biografia' ]
+        
+class FormularioCambioPass(PasswordChangeForm):
+    old_password = forms.CharField(label='Contraseña antigua', widget=forms.PasswordInput)
+    new_password1 = forms.CharField(label='Nueva contraseña', widget=forms.PasswordInput)
+    new_password2 = forms.CharField(label='Repetir contraseña', widget=forms.PasswordInput)
+    
+    class Meta:
+        model = User
+        fields = ['old_password', 'new_password1', 'new_password2']
+        help_text = {k:'' for k in fields}

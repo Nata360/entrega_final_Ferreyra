@@ -18,7 +18,14 @@
     {{formulario}}
     <button>Buscar</button>
 </form>
-
+{% if request.user.is_authenticated %}
+<button>
+    <a class='navbar-brand' href={% url 'inicio:crear_blog' %}>Crea tu blog!</a>
+</button>
+{% endif %}
+<button>
+    <a class= "navbar-brand" href={% url 'inicio:lista_albun' %}>Ver lista de álbunes</a>
+</button>
 {% if blogs %}
 {% for blog in blogs %}
 <li>
@@ -34,9 +41,7 @@
 </button>
 
 </li>
-<button>
-    <a class= "navbar-brand" href={% url 'inicio:crear_albun' pk=blog.pk %}>Crear un Albun</a> 
-</button>
+
 {% endfor %}
 {% else %}
 
@@ -46,9 +51,7 @@
 </button> 
 {% endif %}
 
-<button>
-    <a class= "navbar-brand" href={% url 'inicio:lista_albun' %}>Ver lista de álbunes</a>
-</button>
+
 {% endblock contenido %}
 
 {% block about_inicio %}

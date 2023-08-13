@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth import authenticate, login as django_login
-from usuario.form import MiFormularioDeCreacionDeUsuarios, MiFormularioDeEdicionDeDatosDeUsuario
+from usuario.form import MiFormularioDeCreacionDeUsuarios, MiFormularioDeEdicionDeDatosDeUsuario, FormularioCambioPass
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -72,8 +72,9 @@ def editar_perfil(request):
     return render(request, 'usuario/editar_perfil.html', {'formulario': formulario})
 
 class ModificarPass(LoginRequiredMixin, PasswordChangeView):
-    template_name = 'usuario/modificar_password.html'
-    success_url = reverse_lazy('usuario:modificar_pass')
+    template_name = 'usuario/modificar_pass.html'
+    success_url = reverse_lazy('inicio:inicio')
+    form_class = FormularioCambioPass
     
 def info_perfil(request, usuario_id):
     perfil_usuario = get_object_or_404(User, id=usuario_id)

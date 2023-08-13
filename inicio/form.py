@@ -16,7 +16,7 @@ class CrearBlogFormulario(forms.ModelForm):
 class CrearAlbunFormulario(forms.ModelForm):
     class Meta:
         model = Albun
-        fields = ['titulo', 'autor', 'blog']
+        fields = ['titulo', 'blog']
 
 
 
@@ -26,7 +26,7 @@ class ImagenFormulario(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super(ImagenFormulario, self).__init__(*args, **kwargs)
         self.fields['albun'].queryset = Albun.objects.filter(autor=user)
-    
+        self.fields['blog'].queryset = Blog.objects.filter(autor=user)
     class Meta:
         model = Imagen
         fields = ['albun', 'imagen', 'titulo', 'descripcion', 'blog']

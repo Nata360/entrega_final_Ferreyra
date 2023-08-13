@@ -5,19 +5,39 @@
 <title>{{blog.nombre_blog}}</title>
 {% endblock title %}
 
+{% block imagen_principal %}
+    {% if blog.categoria == 'IL' %}
+    <img class="masthead-avatar mb-5" src={% static 'assets/img/portfolio/ilustracion.jpg' %} alt="..." />
+    {% elif blog.categoria == 'FT' %}
+    <img class="masthead-avatar mb-5" src={% static 'assets/img/portfolio/fotografia.jpg' %} alt="..." />
+    {% elif blog.categoria == 'AT' %}
+    <img class="masthead-avatar mb-5" src={% static 'assets/img/portfolio/AT.jpg' %} alt="..." />
+    {% elif blog.categoria == '3D' %}
+    <img class="masthead-avatar mb-5" src={% static 'assets/img/portfolio/3D.jpg' %} alt="..." />
+    {% endif %}
+
+{% endblock imagen_principal %}
+
 {% block masterhead %}
 <h1 class="masthead-heading text-uppercase mb-0">¡Bienvenidos a {{blog.nombre_blog}}</h1>
 {% endblock masterhead %}
 
 {% block subheading %}
-<p class="masthead-subheading font-weight-light mb-0">Blog de {{blog.categoria}}</p>
+<p class="masthead-subheading font-weight-light mb-0">Blog de {{blog.get_categoria_display}}</p>
 {% endblock subheading %}
 
+
 {% block contenido %}
-{{blog}}
+<li>
+   <p>{{blog}}</p> 
+   <p>{{blog.descripcion}}</p>
+</li>
 
 
 
+<button>
+    <a class= "navbar-brand" href={% url 'inicio:crear_albun' pk=blog.pk %}>Crear un Albun</a> 
+</button>
 <button>
     <a class= "navbar-brand" href={% url 'inicio:lista_albun' %}>Ver lista de álbunes</a>
 </button>
