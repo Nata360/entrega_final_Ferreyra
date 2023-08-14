@@ -37,6 +37,7 @@
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'inicio:lista_blogs' %}>Blogs</a></li>
                         {% if request.user.is_authenticated %}
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'usuario:info_perfil' request.user.id %}>{{request.user.username}}</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'mensajeria:bandeja_de_entrada' %}>Mensajes</a></li>
                         {% if request.user.infoextra.avatar %}
                         <img src={{request.user.infoextra.avatar.url}} alt="" height='60px'>
                         {% endif %}

@@ -13,15 +13,15 @@
 {% endblock subheading %}
 
 {% block contenido %}
+<p>  </p>
 
-<button>
-    <a class='navband' href={% url 'usuario:info_perfil_autor' albun.autor.id %}>Información sobre {{albun.autor}}</a>
-</button>
+    <a class='btn btn-primary' href={% url 'usuario:info_perfil_autor' albun.autor.id %}>Información sobre {{albun.autor}}</a>
 
 
-<button>
-    <a href={% url 'inicio:subir_imagen' %}>Cargar Imagen</a>
-</button>
+
+
+    <a class='btn btn-primary' href={% url 'inicio:subir_imagen' %}>Cargar Imagen</a>
+
 
 
 {% for imagen in object.imagen_set.all %}

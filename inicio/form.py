@@ -14,6 +14,12 @@ class CrearBlogFormulario(forms.ModelForm):
         fields = '__all__'
     
 class CrearAlbunFormulario(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(CrearAlbunFormulario, self).__init__(*args, **kwargs)
+        self.fields['blog'].queryset = Blog.objects.filter(autor=user)
+        
     class Meta:
         model = Albun
         fields = ['titulo', 'blog']

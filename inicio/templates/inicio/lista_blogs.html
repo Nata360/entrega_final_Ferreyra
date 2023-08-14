@@ -19,13 +19,13 @@
     <button>Buscar</button>
 </form>
 {% if request.user.is_authenticated %}
-<button>
-    <a class='navbar-brand' href={% url 'inicio:crear_blog' %}>Crea tu blog!</a>
-</button>
+
+    <a class='btn btn-primary' href={% url 'inicio:crear_blog' %}>Crea tu blog!</a>
+
 {% endif %}
-<button>
-    <a class= "navbar-brand" href={% url 'inicio:lista_albun' %}>Ver lista de álbunes</a>
-</button>
+
+    <a class='btn btn-primary' href={% url 'inicio:lista_albun' %}>Ver lista de álbunes</a>
+
 {% if blogs %}
 {% for blog in blogs %}
 <li>

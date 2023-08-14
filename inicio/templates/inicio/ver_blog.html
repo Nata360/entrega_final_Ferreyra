@@ -28,6 +28,11 @@
 
 
 {% block contenido %}
+<p>    </p>
+    <a class='btn btn-primary' href={% url 'usuario:info_perfil_autor' blog.autor.id %}>Información sobre {{blog.autor}}</a>
+    <a class='btn btn-primary' href={% url 'mensajeria:enviar_mensaje' blog.autor.id %}> Enviar mensaje a {{blog.autor}}</a>
+
+
 <li>
    <p>{{blog}}</p> 
    <p>{{blog.descripcion}}</p>
@@ -35,12 +40,12 @@
 
 
 
-<button>
-    <a class= "navbar-brand" href={% url 'inicio:crear_albun' pk=blog.pk %}>Crear un Albun</a> 
-</button>
-<button>
-    <a class= "navbar-brand" href={% url 'inicio:lista_albun' %}>Ver lista de álbunes</a>
-</button>
+
+    <a class='btn btn-primary' href={% url 'inicio:crear_albun' pk=blog.pk %}>Crear un Albun</a> 
+
+
+    <a class='btn btn-primary' href={% url 'inicio:lista_albun' %}>Ver lista de álbunes</a>
+
 
 
 {% endblock contenido %}

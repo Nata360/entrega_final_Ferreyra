@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Enviar mensaje</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">Mensajería</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Envía un mensaje a {{destinatario}}</p>
+{% endblock subheading %}
+
+{% block imagen_principal %}
+<img class="masthead-avatar mb-5" src={% static 'assets/img/portfolio/correo.png' %} alt="..." />
+{% endblock imagen_principal %}
+
+{% block contenido %}
+
+<form action={% url 'mensajeria:enviar_mensaje' destinatario_id=destinatario.id %} method='POST'>
+    {% csrf_token %}
+<table>
+    {{formulario}}
+    {{formulario.media}}
+</table>
+<button class='btn btn-primary' >Enviar mensaje</button>
+</form> 
+
+{% endblock contenido %}
+
+{% block about %}
+<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'inicio:inicio' %}>About</a></li>
+{% endblock about %}
+
+{% block contacto %}
+{% endblock contacto %}

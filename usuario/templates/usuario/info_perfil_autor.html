@@ -29,7 +29,7 @@
        <p>Email: {{perfil_usuario.email}}</p>
        <p>Biografía: {{perfil_usuario.infoextra.biografia | safe}} </p>
     
-
+<a class='btn btn-primary' href={% url 'mensajeria:enviar_mensaje' perfil_usuario.id %}>Enviar mensaje a {{perfil_usuario.username}}</a>
 
 {% endblock contenido %}
 

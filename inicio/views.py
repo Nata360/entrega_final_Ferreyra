@@ -95,7 +95,14 @@ class CrearAlbun(LoginRequiredMixin,CreateView):
         except Blog.DoesNotExist:
             blog = None
         context['blog'] = blog
+        context['form'] = CrearAlbunFormulario(user=self.request.user)
         return context
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+        
        
     def form_valid(self, form):
         blog = self.get_context_data().get('blog')

@@ -37,3 +37,28 @@ Ultima entrega para el curso de introducción a Python de Coderhouse
  -----------------------------------------------------------------------------
 
 El VIDEO con la explicación y muestra de las funciones de la página se accede mediante este link: https://youtu.be/nq1KxIdI7gU
+
+ -----------------------------------------------------------------------------
+ -----------------------------------------------------------------------------
+
+ Actualización de correcciones:
+
+ ♠ Se ha mejorado el recorrido para crear un albun y subir una imagen:
+    * Se ha corregido el error que permitía a cualquier usuario subir imagenes en albunes y blogs ajenos.
+
+ ♠ Se añadió una pantalla para consultar la información del usuario creador del blog y del albún
+    * Se ha añadido un campo "biografía" con texto enriquecido al modelo "InfoExtra".
+    * Se ha añadido una plantilla con la información del usuario ingresado en la sección de edición de usuario.
+ ♠ Se ha corregido el problema para cambiar la contraseña en la sección de edición de usuario.
+    * Se agregó el botón para hacerlo
+ ♠ Se ha agregado un sistema de mensajería mediante una nueva aplicación:
+    * Para acceder a la bandeja de entrada se agregó el apartado "mensajes" en la parte superior derecha.
+    * Se puede envíar un mensaje al ingresar a un blog, albun o a la información de usuario.
+ ♠ Hubo algunos cambios estéticos menores.
+
+ -----------------------------------------------------------------------------
+ -----------------------------------------------------------------------------
+
+Gracias por la paciencia, todo esto es muy nuevo para mi :D
+
+

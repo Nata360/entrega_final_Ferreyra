@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Enviar mensaje</title>
+{% endblock title %}
+
+{% block masterhead %}
+<h1 class="masthead-heading text-uppercase mb-0">Mensajería</h1>
+{% endblock masterhead %}
+
+{% block subheading %}
+<p class="masthead-subheading font-weight-light mb-0">Bandeja de entrada</p>
+{% endblock subheading %}
+
+{% block imagen_principal %}
+<img class="masthead-avatar mb-5" src={% static 'assets/img/portfolio/correo.png' %} alt="..." />
+{% endblock imagen_principal %}
+
+{% block contenido %}
+<ul>
+    {% for mensaje in mensajes_recibidos %}
+        <li>
+            <p>De: {{ mensaje.remitente.username }}</p>
+            <p>Mensaje: {{ mensaje.contenido|safe}}</p>
+            <p>Enviado: {{ mensaje.fecha_envio }}</p>
+            <a href={% url 'mensajeria:responder_mensaje' mensaje_id=mensaje.id %} class='btn btn-primary' >Responder</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock contenido %}
+
+{% block about %}
+
+<li class='btn btn-primary'><a class="nav-link py-3 px-0 px-lg-3 rounded" href={% url 'inicio:inicio' %}>Volver a Home</a></li>
+
+
+{% endblock about %}
+
+{% block contacto %}
+{% endblock contacto %}
